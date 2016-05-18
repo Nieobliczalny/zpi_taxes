@@ -1,25 +1,14 @@
 package Stany.st;
 
-import java.util.Scanner;
+public class Stan {
+	private String nazwa = "";
+	private double podatek;
 
-public class Stan 
-{
-	private String nazwa = null;	
-	private int podatek = 0;
-	
-	public Stan(String linia) 
-	{
-		Scanner s = new Scanner(linia);
-		nazwa = s.next();
-		podatek = s.nextInt();
-		s.close();
-		
-	}	
-	
-	
-	@Override
-	public String toString() {
-		return "Stan [nazwa=" + nazwa + ", podatek=" + podatek + "]";
+	public Stan(String linia) {
+		String s = linia;
+		String[] tokens = s.split(",");
+		nazwa = tokens[0];
+		podatek = Double.valueOf(tokens[1]);			 	
 	}
 
 	public String getNazwa() {
@@ -30,16 +19,12 @@ public class Stan
 		this.nazwa = nazwa;
 	}
 
-	public int getPodatek() {
+	public double getPodatek() {
 		return podatek;
 	}
 
-	public void setPodatek(int podatek) {
+	public void setPodatek(double podatek) {
 		this.podatek = podatek;
 	}
-	
-	
-	
-	
-	
+
 }

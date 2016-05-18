@@ -14,8 +14,7 @@ public class App
     public static void main( String[] args ) throws FileNotFoundException
     {
     	ArrayList<Stan> lista = new ArrayList<Stan>();		
-		lista = readTextFile();	
-		System.out.println(lista);
+		lista = readTextFile();		
     }
     
 	public static ArrayList<Stan> readTextFile() throws FileNotFoundException
