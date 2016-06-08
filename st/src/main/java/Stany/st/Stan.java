@@ -1,6 +1,11 @@
 package Stany.st;
 
 public class Stan {
+	@Override
+	public String toString() {
+		return "nazwa stanu: " + nazwa + " podatek = " + podatek;
+	}
+
 	private String nazwa = "";
 	private double podatek;
 
