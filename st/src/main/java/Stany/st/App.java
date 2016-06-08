@@ -9,14 +9,14 @@ import java.util.Scanner;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args ) throws FileNotFoundException
     {
-    	ArrayList<Stan> lista = new ArrayList<Stan>();		
-		lista = readTextFile();		
+    	ArrayList<Stan> lista = new ArrayList<Stan>();
+		lista = readTextFile();
     }
-    
+
 	public static ArrayList<Stan> readTextFile() throws FileNotFoundException
 	{
 		ArrayList<Stan> temp = new ArrayList<Stan>();
@@ -26,6 +26,23 @@ public class App
 			temp.add(new Stan(reader.nextLine()));
 		}
 		reader.close();
-		return temp;		
+		return temp;
 	}
+
+	public static double countTax(double base, double tax)
+	{
+		return base * (1 + tax / 100.0);
+	}
+
+	public static double getTax(float baseTax, float limit, float value)
+	{
+		if (value <= limit) return 0;
+		return baseTax;
+	}
+/*
+	public static double calcTax(Produkt p, Stan s)
+	{
+
+	}
+	*/
 }
