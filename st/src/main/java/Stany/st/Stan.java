@@ -2,13 +2,23 @@ package Stany.st;
 
 public class Stan {
 	private String nazwa = "";
-	private double podatek;
+	private DanePodatku inne;
+	private DanePodatku groceries;
+	private DanePodatku preparedFood;
+	private DanePodatku prescriptionDrug;
+	private DanePodatku nonPrescriptionDrug;
+	private DanePodatku clothing;
 
 	public Stan(String linia) {
 		String s = linia;
 		String[] tokens = s.split(",");
 		nazwa = tokens[0];
-		podatek = Double.valueOf(tokens[1]);			 	
+		inne = new DanePodatku(tokens[1], null);
+		groceries = new DanePodatku(tokens[2], inne);
+		preparedFood = new DanePodatku(tokens[3], inne);
+		prescriptionDrug = new DanePodatku(tokens[4], inne);
+		nonPrescriptionDrug = new DanePodatku(tokens[5], inne);
+		clothing = new DanePodatku(tokens[6], inne);
 	}
 
 	public String getNazwa() {
@@ -19,12 +29,7 @@ public class Stan {
 		this.nazwa = nazwa;
 	}
 
-	public double getPodatek() {
-		return podatek;
+	public DanePodatku getPodatek() {
+		return inne;
 	}
-
-	public void setPodatek(double podatek) {
-		this.podatek = podatek;
-	}
-
 }
