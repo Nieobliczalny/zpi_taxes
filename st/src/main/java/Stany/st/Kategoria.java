@@ -13,7 +13,7 @@ public class Kategoria {
 		ArrayList<String> temp2 = new ArrayList<String>();
 		
 		for (int i = 0; i < temp.size(); i++) {
-			if(temp.get(i).getKategoria()==kategoria){
+			if(temp.get(i).getKategoria().equals(kategoria)){
 				temp2.add(temp.get(i).getNazwa());
 				
 			}
