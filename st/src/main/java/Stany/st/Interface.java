@@ -87,6 +87,7 @@ public class Interface extends Application{
 				for (String s : katProdukt.get(t1)) {
 					productComboBox.getItems().add(s);
 				}
+				updatePodatek(stateComboBox.valueProperty().get());
 			}
 	});
 
@@ -100,21 +101,12 @@ public class Interface extends Application{
 
 						}
 					}
+					updatePodatek(stateComboBox.valueProperty().get());
 				}
 		});
 		stateComboBox.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-					for (Stan s : stanList) {
-						if (s.getNazwa().equals(t1)) {
-							String productName = productComboBox.valueProperty().get();
-							Produkt produkt = null;
-							for (Produkt p : produktList) {
-								if (p.getNazwa().equals(productName)) produkt = p;
-							}
-							podatekLabel.setText(String.valueOf(s.getPodatek(produkt).getPodatek()));
-							podatek = s.getPodatek(produkt).getPodatek();
-						}
-					}
+					updatePodatek(t1);
 				}
 		});
 		calculateButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -132,6 +124,21 @@ public class Interface extends Application{
 
 			}
 		});
+	}
+
+	protected void updatePodatek(String nazwa)
+	{
+		for (Stan s : stanList) {
+			if (s.getNazwa().equals(nazwa)) {
+				String productName = productComboBox.valueProperty().get();
+				Produkt produkt = null;
+				for (Produkt p : produktList) {
+					if (p.getNazwa().equals(productName)) produkt = p;
+				}
+				podatekLabel.setText(String.valueOf(s.getPodatek(produkt).getPodatek()));
+				podatek = s.getPodatek(produkt).getPodatek();
+			}
+		}
 	}
 
 	public double obliczPodatek(double cena, double podatek) {
