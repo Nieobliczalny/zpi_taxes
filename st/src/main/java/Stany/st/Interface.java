@@ -42,12 +42,12 @@ public class Interface extends Application{
 	ObservableList<Stan> stanList = FXCollections.observableArrayList();
 	ObservableList<Produkt> produktList = FXCollections.observableArrayList();
 	ObservableList<Kategoria> kategoriarList = FXCollections.observableArrayList();
-	
+
 	HashMap<String,ArrayList<String>> katProdukt = new HashMap<String, ArrayList<String>>();
-	
+
 	private Double cena;
 	private Double podatek;
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -61,7 +61,7 @@ public class Interface extends Application{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 
 	@FXML
 	private void initialize() throws IOException, NoSuchFieldException, SecurityException {
@@ -71,7 +71,7 @@ public class Interface extends Application{
 			stateComboBox.getItems().add(s.getNazwa());
 		}
 		stateComboBox.setValue("Wybierz stan");
-		
+
 		produktList.addAll(App.readProductsFromFile());
 		for (Produkt p : produktList) {
 			katProdukt.put(p.getKategoria(),Kategoria.readProductsFromCatogorie(p.getKategoria()));
@@ -89,7 +89,7 @@ public class Interface extends Application{
 				}
 			}
 	});
-		
+
 		productComboBox.setValue("Wybierz produkt");
 		productComboBox.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> ov, String t, String t1) {
@@ -106,33 +106,38 @@ public class Interface extends Application{
 			public void changed(ObservableValue<? extends String> ov, String t, String t1) {
 					for (Stan s : stanList) {
 						if (s.getNazwa().equals(t1)) {
-							podatekLabel.setText(String.valueOf(s.getPodatek()));
-							podatek = s.getPodatek();
+							String productName = productComboBox.valueProperty().get();
+							Produkt produkt = null;
+							for (Produkt p : produktList) {
+								if (p.getNazwa().equals(productName)) produkt = p;
+							}
+							podatekLabel.setText(String.valueOf(s.getPodatek(produkt).getPodatek()));
+							podatek = s.getPodatek(produkt).getPodatek();
 						}
 					}
 				}
 		});
 		calculateButton.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			public void handle(ActionEvent event) {
 				double cena = Double.valueOf(priceTextField.getText());
 				priceCalcLabel.setText(String.valueOf(obliczPodatek(cena,podatek)));
 			}
 		});
-		
+
 		priceTextField.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
 				System.out.println(priceTextField.getText());
-				
+
 			}
 		});
 	}
-	
+
 	public double obliczPodatek(double cena, double podatek) {
 		return cena + (cena * (podatek * 0.01));
 	}
-	
+
 
 	public static void main(String[] args) {
 		launch(args);
