@@ -13,10 +13,10 @@ public class AppTest extends TestCase {
 		
 	}
 	
-	public void testReadTaxesFromFile() {
-		String[] productNames = {"Apple", "Apple Cake", "Lenovo Y700-17", "Geodon", "Katya Mono Printed Sleeveless Shift Dress"};
-		int[] prices = {2, 11, 3753, 25};
-		String[] categories = {"Groceries", "Prepared food", "Other", "Clothing"};
+	public void testReadProductsFromFile() {
+		String[] productNames = {"Apple", "Apple Cake", "Katya Mono Printed Sleeveless Shift Dress"};
+		int[] prices = {2, 11, 25};
+		String[] categories = {"Groceries", "Prepared food", "Clothing"};
 		
 		try {
 			List<Produkt> productsList = App.readProductsFromFile(LISTA_PRODUKTOW_PATH);
@@ -38,8 +38,22 @@ public class AppTest extends TestCase {
 		}
 	}
 	
-	public void testReadProductsFromFile() {
+	public void testReadTaxesFromFile() {
+		Stan alabamaStan = new Stan("Alabama,4%,4%,4%,0%,4%,4%");
+		Stan columbiaStan = new Stan("District of Columbia,5.75%,0%,10%,0%,0%,5.75%");
+		Stan kansasStan = new Stan("Kansas,6.15%,6.15%,6.15%,6.15%,6.15%,6.15%");
 		
+		List<Stan> stanList = null;
+		try {
+			stanList = App.readTaxesFromFile(LISTA_STANOW_PATH);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		if (stanList != null) {
+			assertEquals(alabamaStan, stanList.get(0));
+			assertEquals(columbiaStan, stanList.get(1));
+			assertEquals(kansasStan, stanList.get(2));
+		}
 	}
-
 }
