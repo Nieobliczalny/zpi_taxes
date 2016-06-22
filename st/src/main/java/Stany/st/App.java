@@ -13,22 +13,34 @@ public class App
 {
     public static void main( String[] args ) throws FileNotFoundException
     {
-    	ArrayList<Stan> lista = new ArrayList<Stan>();
-		lista = readStany();
-		System.out.println(lista.size());
-		System.out.println(lista.get(0).getPodatek().getLimit());
-		System.out.println(lista.get(0).getPodatek().getPodatek());
-		System.out.println(lista.get(18).getPodatek().getLimit());
-		System.out.println(lista.get(18).getPodatek().getPodatek());
+    	ArrayList<Stan> listaStanow = new ArrayList<Stan>();
+		listaStanow = readTaxesFromFile();
+		for(Stan s : listaStanow) System.out.println(s);
+		ArrayList<Produkt> listaProduktow = new ArrayList<Produkt>();
+		listaProduktow = readProductsFromFile();
+		for(Produkt p : listaProduktow) System.out.println(p);
+		//Przykładowe użycie obliczania listy stanów
+		System.out.println(listaStanow.get(0).getPodatek(listaProduktow.get(20)).getPodatek());
     }
 
-	public static ArrayList<Stan> readStany() throws FileNotFoundException
+	public static ArrayList<Stan> readTaxesFromFile() throws FileNotFoundException
 	{
 		ArrayList<Stan> temp = new ArrayList<Stan>();
 		Scanner reader = new Scanner(new FileReader("lista_stanow.txt"));
 		while(reader.hasNextLine())
 		{
 			temp.add(new Stan(reader.nextLine()));
+		}
+		reader.close();
+		return temp;
+	}
+	public static ArrayList<Produkt> readProductsFromFile() throws FileNotFoundException
+	{
+		ArrayList<Produkt> temp = new ArrayList<Produkt>();
+		Scanner reader = new Scanner(new FileReader("produkty.txt"));
+		while(reader.hasNextLine())
+		{
+			temp.add(new Produkt(reader.nextLine()));
 		}
 		reader.close();
 		return temp;

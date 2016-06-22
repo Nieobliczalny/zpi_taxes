@@ -1,10 +1,35 @@
-Apple MacBook Air 13; 3898
-Lenovo Ideapad 100-15IBY; 899
-ASUS T100TAF-W10-DK076T; 799
-HP 250 G4; 1139
-ASUS R556LJ-XO739T; 1749
-Apple MacBook Pro; 5349
-ASUS R556LJ-XO164T; 2139
-ASUS R540LA-XX020; 1548
-Lenovo IdeaPad 100-15IBD; 1801
-Lenovo Y700-17; 3753
+Apple,2,Groceries
+Tomato,3,Groceries
+Potato,1,Groceries
+Banana,4,Groceries
+Onion,2,Groceries
+Angel Cake,10,Prepared food
+Apple Cake,11,Prepared food
+Babka,12,Prepared food
+Beer cake,13,Prepared food
+Better than sex cake,14,Prepared food
+Apple MacBook Air 13,3898,Other
+Lenovo Ideapad 100-15IBY,899,Other
+ASUS T100TAF-W10-DK076T,799,Other
+HP 250 G4,1139,Other
+ASUS R556LJ-XO739T,1749,Other
+Apple MacBook Pro,5349,Other
+ASUS R556LJ-XO164T,2139,Other
+ASUS R540LA-XX020,1548,Other
+Lenovo IdeaPad 100-15IBD,1801,Other
+Lenovo Y700-17,3753,Other
+Actos,30,Prescription drug
+Benicar,40,Prescription drug
+Celexa,50,Prescription drug
+Efixor,60,Prescription drug
+Elavil,70,Prescription drug
+Dexilant,30,Non-prescription drug
+Witamina C,10,Non-prescription drug
+Flexeril,11,Non-prescription drug
+Flomax,12,Non-prescription drug
+Geodon,13,Non-prescription drug
+Diana Flute Sleeve Cheesecloth Dress,15,Clothing
+Maria Monochrome Aztec Kimono Maxi Dress,15,Clothing
+Niyati Tassel Trim Off The Shoulder Shift Dress,20,Clothing
+Katya Mono Printed Sleeveless Shift Dress,25,Clothing
+Sandy Scoop Neck Maxi Dress,30,Clothing
