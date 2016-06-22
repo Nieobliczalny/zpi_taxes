@@ -1,0 +1,5 @@
+Apple,2,Groceries
+Apple Cake,11,Prepared food
+Lenovo Y700-17,3753,Other
+Geodon,13,Non-prescription drug
+Katya Mono Printed Sleeveless Shift Dress,25,Clothing

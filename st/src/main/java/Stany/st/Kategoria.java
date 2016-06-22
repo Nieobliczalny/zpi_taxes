@@ -9,14 +9,14 @@ public class Kategoria {
 	
 	public static ArrayList<String> readProductsFromCatogorie(String kategoria) throws FileNotFoundException
 	{
-		ArrayList<Produkt> temp = App.readProductsFromFile();
+		ArrayList<Produkt> temp = App.readProductsFromFile(App.PRODUKTY_PATH);
 		ArrayList<String> temp2 = new ArrayList<String>();
 		
 		for (int i = 0; i < temp.size(); i++) {
 			if(temp.get(i).getKategoria().equals(kategoria)){
 				temp2.add(temp.get(i).getNazwa());
 				
-			}
+			} 
 			
 		}		
 		return temp2;		

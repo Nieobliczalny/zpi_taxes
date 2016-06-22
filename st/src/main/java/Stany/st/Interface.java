@@ -18,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -31,7 +30,7 @@ public class Interface extends Application{
 	@FXML
 	private ComboBox<String> stateComboBox;
 	@FXML
-	private TextField priceTextField;
+	private Label priceLabel;
 	@FXML
 	private Label podatekLabel;
 	@FXML
@@ -44,6 +43,7 @@ public class Interface extends Application{
 	ObservableList<Kategoria> kategoriarList = FXCollections.observableArrayList();
 	
 	HashMap<String,ArrayList<String>> katProdukt = new HashMap<String, ArrayList<String>>();
+	ArrayList<String> productsFromCategory;
 	
 	private Double cena;
 	private Double podatek;
@@ -66,19 +66,28 @@ public class Interface extends Application{
 	@FXML
 	private void initialize() throws IOException, NoSuchFieldException, SecurityException {
 
-		stanList.addAll(App.readTaxesFromFile());
+		stanList.addAll(App.readTaxesFromFile(App.LISTA_STANOW_PATH));
 		for (Stan s : stanList) {
 			stateComboBox.getItems().add(s.getNazwa());
 		}
 		stateComboBox.setValue("Wybierz stan");
 		
-		produktList.addAll(App.readProductsFromFile());
+		produktList.addAll(App.readProductsFromFile(App.PRODUKTY_PATH));
 		for (Produkt p : produktList) {
 			katProdukt.put(p.getKategoria(),Kategoria.readProductsFromCatogorie(p.getKategoria()));
+			//productComboBox.getItems().add(p.getNazwa());
 		}
+		for (String s : Kategoria.readProductsFromCatogorie("Clothing")) {
+			System.out.println(s);
+		}
+		
 		for (Map.Entry<String,ArrayList<String>> entry : katProdukt.entrySet())
 		{
 		   categoryComboBox.getItems().add(entry.getKey());
+//		   for (String p : entry.getValue()) {
+//			   System.out.println(p);
+//			   productComboBox.getItems().add(p);
+//		   }
 		}
 
 		categoryComboBox.valueProperty().addListener(new ChangeListener<String>() {
@@ -87,6 +96,13 @@ public class Interface extends Application{
 				for (String s : katProdukt.get(t1)) {
 					productComboBox.getItems().add(s);
 				}
+//				for (Produkt p : produktList){
+//					   System.out.println("t1 " + t1);
+//					System.out.println(p.getKategoria());
+//						if (t1.equals(p.getKategoria())) {
+//							   productComboBox.getItems().add(p.getNazwa());
+//						}
+//				   }
 			}
 	});
 		
@@ -95,7 +111,7 @@ public class Interface extends Application{
 			public void changed(ObservableValue<? extends String> ov, String t, String t1) {
 					for (Produkt p : produktList) {
 						if (p.getNazwa().equals(t1)) {
-							priceTextField.setText(String.valueOf(p.getCena()));
+							priceLabel.setText(String.valueOf(p.getCena()));
 							cena = p.getCena();
 
 						}
@@ -115,23 +131,12 @@ public class Interface extends Application{
 		calculateButton.setOnAction(new EventHandler<ActionEvent>() {
 			
 			public void handle(ActionEvent event) {
-				double cena = Double.valueOf(priceTextField.getText());
-				priceCalcLabel.setText(String.valueOf(obliczPodatek(cena,podatek)));
-			}
-		});
-		
-		priceTextField.setOnAction(new EventHandler<ActionEvent>() {
-
-			public void handle(ActionEvent event) {
-				System.out.println(priceTextField.getText());
-				
+				priceCalcLabel.setText(String.valueOf(cena+(cena*(podatek*0.01))));
 			}
 		});
 	}
 	
-	public double obliczPodatek(double cena, double podatek) {
-		return cena + (cena * (podatek * 0.01));
-	}
+	
 	
 
 	public static void main(String[] args) {
