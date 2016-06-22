@@ -3,7 +3,7 @@ package Stany.st;
 public class Stan {
 	@Override
 	public String toString() {
-		return "nazwa stanu: " + nazwa + " podatek = " + podatek;
+		return "nazwa stanu: " + nazwa + " podatekGlowny = " + inne.getPodatek();
 	}
 
 	private String nazwa = "";
@@ -34,7 +34,13 @@ public class Stan {
 		this.nazwa = nazwa;
 	}
 
-	public DanePodatku getPodatek() {
+	public DanePodatku getPodatek(Produkt produkt) {
+		String kategoria = produkt.getKategoria();
+		if (kategoria.equalsIgnoreCase("groceries")) return groceries;
+		if (kategoria.equalsIgnoreCase("prepared food")) return preparedFood;
+		if (kategoria.equalsIgnoreCase("prescription drug")) return prescriptionDrug;
+		if (kategoria.equalsIgnoreCase("non-prescription drug")) return nonPrescriptionDrug;
+		if (kategoria.equalsIgnoreCase("clothing")) return clothing;
 		return inne;
 	}
 }
