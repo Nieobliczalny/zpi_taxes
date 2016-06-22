@@ -113,7 +113,9 @@ public class Interface extends Application{
 
 			public void handle(ActionEvent event) {
 				double cena = Double.valueOf(priceTextField.getText());
-				priceCalcLabel.setText(String.valueOf(obliczPodatek(cena,podatek)));
+				double cenaZPodatkiem = obliczPodatek(cena,podatek);
+				cenaZPodatkiem = Math.round(100 * cenaZPodatkiem) / 100.0;
+				priceCalcLabel.setText(String.valueOf(cenaZPodatkiem));
 			}
 		});
 
